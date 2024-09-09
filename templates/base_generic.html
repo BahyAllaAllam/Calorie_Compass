@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+{% endblock styles %}
+
+{% block header %}
+{% endblock header %}
+
+{% block content %}
+<div class="container">
+    <a href="/">
+        <img class="logo" src="{% static 'img/logo.png' %}" alt="Calorie Compass Logo"/>
+    </a>
+    {% block auth_content %}
+    {% endblock auth_content %}
+</div>
+{%  endblock content%}
+
+{% block footer %}
+{% endblock footer %}

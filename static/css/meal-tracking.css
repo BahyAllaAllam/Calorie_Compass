@@ -1,0 +1,178 @@
+/* body */
+body {
+  background-color: #f8f9fa;
+}
+
+/* Header */
+.logo {
+  width: 200px;
+}
+
+.align-right {
+  justify-content: flex-end;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: #00D363;
+}
+
+a:hover {
+  text-decoration: underline;
+  opacity: 0.7;
+}
+
+.search-container input {
+  padding: 10px;
+  border-radius: 20px;
+  border: 1px solid black;
+  margin-top: 10px;
+}
+h1 {
+  margin: 50px auto;
+  font-size: 30px;
+  text-align: center;
+}
+
+h2 {
+    margin: 20px auto;
+    padding: 20px;
+    text-align: center;
+}
+
+.loading-indicator {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.nutrition-report-display {
+    display: none;
+}
+
+.food-name,
+.calorie-amount {
+  color: red;
+}
+
+#add-meal-button {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+/* Contacts */
+.contacts {
+  color: #fff;
+  background-color: #4d467f;
+  padding-left: 250px;
+}
+.contacts h1 {
+  color: #fff;
+  line-height: 1.5;
+}
+.social-contacts a i {
+  color: #fff;
+  font-size: 45px;
+}
+
+footer {
+  width: 100%;
+  padding: 20px;
+  font-size: 15px;
+  font-weight: bolder;
+  font-family: "Playwrite AU VIC", cursive;
+  background-color: #343a40;
+  color: #4d467f;
+  text-align: center;
+}
+
+/* Responsive CSS */
+
+@media (max-width: 992px) {
+  .custom-main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+  h1,
+  h3 {
+    font-size: 30px;
+    margin: 20px;
+  }
+
+  p {
+    font-size: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .align-right {
+    justify-content: flex-start;
+  }
+
+  .contacts {
+    padding: 0;
+  }
+
+  h1,
+  h3 {
+    font-size: 24px;
+    margin: 20px;
+  }
+
+  p {
+    font-size: 18px;
+  }
+
+  .our-products {
+    margin: 50px;
+    padding: 20px;
+  }
+
+  footer {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .contacts h1 {
+    font-size: 20px;
+    line-height: 1.2;
+  }
+
+  .social-contacts a i {
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 576px) {
+  .logo {
+    width: 120px;
+  }
+
+  .contacts {
+    padding-left: 20px;
+  }
+
+  .projects {
+    margin: 50px;
+  }
+
+  .our-products {
+    margin: 30px;
+    padding: 15px;
+    font-size: 20px;
+  }
+
+  .view-work-button {
+    margin-top: 50px;
+    font-size: 18px;
+  }
+
+  .custom-main-image {
+    width: 100%;
+    height: auto;
+    border-radius: 0;
+  }
+}
