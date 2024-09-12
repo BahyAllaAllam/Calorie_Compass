@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block styles %}
+  <link rel="stylesheet" href="{% static 'css/calorie-cal-style.css' %}" />
+{% endblock styles %}
+
+{% block extra_head %}
+  - Daily meals tracking
+{% endblock extra_head %}
+
+{% block content %}
+    <h1>Daily Meals Tracker</h1>
+
+    <div class="container">
+
+        <div class="search-container">
+            <form class="d-flex" role="search" method="post">
+                <input class="form-control me-2 w-50" type="text"
+                       placeholder="Enter Your Food per grams or unit (100 grams of egg OR one egg)..."
+                     aria-label="Search" name="query"/>
+                <button class="btn btn-outline-dark m-1" type="submit">Search</button>
+            </form>
+        </div>
+
+        <div class="loading-indicator" style="display: none">
+            <img src="images/loading.gif" alt="Loading..." />
+        </div>
+
+        <div class="nutrition-report-display">
+            <h2>
+                The Calories in <span class="food-name"></span> are
+                <span class="calorie-amount"></span> calories
+            </h2>
+            <h3>Nutritions Facts</h3>
+            <div class="nutrition-report">
+                <table class="table table-secondary">
+                    <thead>
+                      <tr>
+                        <th scope="col"></th>
+                        <th scope="col">Unit (g or mg)</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="table-light">
+                        <th scope="row">Serving Size</th>
+                        <td class="size-report"></td>
+                        <td class="size-report-percentage"></td>
+                      </tr>
+                      <tr class="table-warning">
+                        <th scope="row">Total Carbohydrates</th>
+                        <td class="carb-report"></td>
+                        <td class="carb-report-percentage"></td>
+                      </tr>
+                      <tr class="table-warning">
+                        <th scope="row">Fiber</th>
+                        <td class="fiber-report"></td>
+                        <td class="fiber-report-percentage"></td>
+                      </tr>
+                      <tr class="table-warning">
+                        <th scope="row">Sugar</th>
+                        <td class="sugar-report"></td>
+                        <td class="sugar-report-percentage"></td>
+                      </tr>
+                      <tr class="table-success">
+                        <th scope="row">Proteins</th>
+                        <td class="proteins-report"></td>
+                        <td class="proteins-report-percentage"></td>
+                      </tr>
+                      <tr class="table-success">
+                        <th scope="row">Sodium</th>
+                        <td class="sodium-report"></td>
+                        <td class="sodium-report-percentage"></td>
+                      </tr>
+                      <tr class="table-success">
+                        <th scope="row">Potassium</th>
+                        <td class="potassium-report"></td>
+                        <td class="potassium-report-percentage"></td>
+                      </tr>
+                      <tr class="table-danger">
+                        <th scope="row">Total Fats</th>
+                        <td class="fats-report"></td>
+                        <td class="fats-report-percentage"></td>
+                      </tr>
+                      <tr class="table-danger">
+                        <th scope="row">Saturated Fats</th>
+                        <td class="Sfats-report"></td>
+                        <td class="Sfats-report-percentage"></td>
+                      </tr>
+                      <tr class="table-danger">
+                        <th scope="row">Cholesterol</th>
+                        <td class="cholesterol-report"></td>
+                        <td class="cholesterol-report-percentage"></td>
+                      </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+
+        <ul>
+            {% for meal in meals %}
+                <li>
+                    <strong> {{ meal.name }} - The Calories are {{ meal.calories }} calorie - {{ meal.created_at|date:"d-m-Y" }} </strong>
+                    <ul>
+                        {% for item in meal.food_items|split:"," %}
+                            <li>{{ item }}</li>
+                        {% endfor %}
+                        <form method="post" style="display:inline;">
+                            {% csrf_token %}
+                            <input type="hidden" name="meal_slug" value="{{ meal.slug }}">
+                            <input type="hidden" name="_method" value="delete">
+                            <button class="btn btn-outline-danger" type="submit">Delete</button>
+                        </form>
+                    </ul>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <h3>Add New Meal</h3>
+        <form id="add-meal-form" method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button id="add-meal-button" class="btn btn-outline-dark" type="submit" data-url="{% url 'meals_tracker:meals_list' %}">Add Meal</button>
+        </form>
+    </div>
+{% endblock content %}
+
+{% block scripts %}
+    <script src="{% static 'js/calorie-cal.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="{% static 'js/meals_tracking.js' %}"></script>
+{% endblock scripts %}
