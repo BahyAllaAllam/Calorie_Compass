@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load static %}
+{% load bootstrap5 %}
+
+{% block extra_head %}
+  - {{user.username}} Profile
+{% endblock extra_head %}
+
+{% block content %}
+    <div class="content">
+        <div class="col-md-8">
+            <div class="content-section">
+                <div class="media">
+                    <img class="rounded-circle account-img" src="{{ user.profile.image.url }}" alt="{{ user.username }} Profile Picture">
+                    <div class="media-body">
+                        <h2 class="account-heading">
+                            {{user.username}}
+                        </h2>
+                        <p class="text-secondary">{{user.email}}</p>
+                        <a class="btn btn-outline-success btn-sm mt-1 mb-1" href="{% url 'account_change_password' %}">Change Password</a>
+                        <a class="btn btn-outline-success btn-sm mt-1 mb-1" href="{% url 'account_email' %}">Change Email</a>
+                        <a class="btn btn-outline-danger btn-sm mt-1 mb-1" href="{% url 'users:delete-user' user.username %}">Delete Account</a>
+                    </div>
+                </div>
+                <br>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4 text-center">Profile Info</legend>
+                        {% bootstrap_form u_form %}
+                        {% bootstrap_form p_form %}
+                    </fieldset>
+                    <button class="btn btn-outline-success w-100 mt-4" type="submit">Update</button>
+                    <a class="btn btn-outline-danger w-100 mt-4" href="/">Cancel</a>
+                </form>
+            </div>
+        </div>
+    </div>
+
+{%  endblock content %}

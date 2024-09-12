@@ -1,0 +1,23 @@
+{% extends "base_generic.html" %}
+{% load allauth i18n %}
+{% load static %}
+
+{% block extra_head %}
+  - Delete {{username}} account
+{% endblock extra_head %}
+
+{% block auth_content %}
+    {% element h1 %}
+        Delete Confirmation
+    {% endelement %}
+    {% element p %}
+        Are you sure you want to delete your account "{{ user.username }}"?
+    {% endelement %}
+    <form method="POST">
+        {% csrf_token %}
+        {{ redirect_field }}
+        <input class="btn btn-outline-danger" type="submit" value="Yes, Delete">
+        <a class="btn btn-outline-success" href="{% url 'users:profile_edit'%}">Cancel</a>
+    </form>
+
+{% endblock auth_content %}
