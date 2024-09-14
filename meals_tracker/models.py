@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.utils.text import slugify
 from django.urls import reverse
+from django.utils import timezone
+from datetime import timedelta
 
 
 class Meals(models.Model):
@@ -10,10 +12,11 @@ class Meals(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     food_items = models.TextField()
     calories = models.PositiveIntegerField(default=0)
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True, help_text='The date the meal was created.')
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
+        self.name = self.name.capitalize()
         if isinstance(self.calories, float):
             self.calories = round(self.calories)
         super(Meals, self).save(*args, **kwargs)
@@ -28,3 +31,9 @@ class Meals(models.Model):
 
     def get_absolute_url(self):
         return reverse('meals_tracker:meals_tracking', kwargs={'slug': self.slug})
+
+    @classmethod
+    def deleting_meals_older_than_7days(cls, user):
+        # Get meals for the user from the last 6 days
+        seven_days_ago = timezone.now() - timedelta(days=7)
+        Meals.objects.filter(user=user, created_at__lt=seven_days_ago).delete()
