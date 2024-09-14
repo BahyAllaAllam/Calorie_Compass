@@ -8,6 +8,8 @@ from django.conf import settings
 from django.template.defaulttags import register
 from django.contrib import messages
 from django.urls import reverse
+from django.core import serializers
+from django.utils.dateformat import DateFormat
 
 
 @register.filter(name='split')
@@ -55,16 +57,19 @@ class MealView(LoginRequiredMixin, View):
 
 
     def form_invalid(self, request, form):
-        meals = Meals.objects.filter(user=request.user)
-        selected_meal = None
-        slug = request.GET.get('slug')
-
-        if slug:
-            selected_meal = get_object_or_404(Meals, slug=slug, user=request.user)
-
+        Meals.deleting_meals_older_than_7days(request.user)
+        meals = Meals.objects.filter(user=request.user).order_by('-created_at').values('name', 'calories', 'created_at', 'slug', 'food_items')
+        meals = list(meals)
+        meals_dates = set()
+        for meal in meals:
+            meals_dates.add(meal['created_at'])
+            meal['created_at'] = DateFormat(meal['created_at']).format('d-m-Y')
+            # meals_dates = sorted(meals_dates, reverse=True)
+            print(meal['created_at'])
+        print(meals_dates)
         return render(request, self.template_name, {
             'meals': meals,
-            'selected_meal': selected_meal,
+            'meals_dates': meals_dates,
             'form': form,
             'calorie_ninjas_api_key': settings.CALORIE_NINJAS_API_KEY
         })

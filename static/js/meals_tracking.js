@@ -1,5 +1,6 @@
 document.getElementById('add-meal-button').addEventListener('click', function(event) {
     event.preventDefault();
+
     // check if the input is valid
     function validateInput(input) {
         const commaSpaceSeparated = input.split(', ').length > 1;
@@ -68,11 +69,13 @@ document.getElementById('add-meal-button').addEventListener('click', function(ev
                 if (response.status === 200) {
                     window.location.href = response.data.redirect_url;
                     location.reload(); // Reload the page to show the new meal
+                    document.querySelector('textarea[name="food_items"]').value = "";
+                    document.getElementById('meal-name').value = "";
                 }
             })
             .catch(error => {
                 console.error('Error submitting form:', error);
-                alert('Error submitting the form: Please enter vaild food items.');
+                alert('Error submitting the form: Please enter vaild data.');
             });
         }
     });
