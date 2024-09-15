@@ -13,12 +13,19 @@ class Meals(models.Model):
     food_items = models.TextField()
     calories = models.PositiveIntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True, help_text='The date the meal was created.')
+    date = models.DateField(default=timezone.now, help_text='The date the meal was consumed.')
+
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.name)
         self.name = self.name.capitalize()
         if isinstance(self.calories, float):
             self.calories = round(self.calories)
+
+        # Check if a meal with the same name exists for the same user and date
+        if Meals.objects.filter(Q(user=self.user) & Q(name__iexact=self.name) & Q(date=self.date)).exists():
+            raise ValueError("A meal with the same name already exists for this date.")
+        
         super(Meals, self).save(*args, **kwargs)
 
     def __str__(self):
@@ -28,6 +35,7 @@ class Meals(models.Model):
     class Meta:
         """The plural name used in the admin interface for the model."""
         verbose_name_plural = "Meals"
+        unique_together = ('name', 'user', 'date')
 
     def get_absolute_url(self):
         return reverse('meals_tracker:meals_tracking', kwargs={'slug': self.slug})

@@ -17,11 +17,9 @@
         <form id="add-meal-form" method="post" action="{% url 'meals_tracker:meals_list' %}">
             {% csrf_token %}
             <div class="form-group">
-<!--                <label for="meal-name">Meal Name</label>-->
                 <input type="text" class="form-control" id="meal-name" name="name" maxlength="200" placeholder="Meal name (e.g., Breakfast)" required>
             </div>
             <div calss="form-group">
-<!--                <label for="food-items">Food Items</label>-->
                 <textarea type="text" class="form-control" id="food-items" name="food_items" placeholder="Food items separated by a commaspace, space, or plus sign" rows="5" required></textarea>
             </div>
             <div class="form-group text-center">
@@ -30,55 +28,39 @@
         </form>
 
         <!-- Meals List -->
-<!--        <div class="meal-list mt-5">-->
-<!--            <h4>Your Meals</h4>-->
-<!--            <ul class="list-group">-->
-<!--                {% for meal in meals %}-->
-<!--                    <li class="list-group-item">-->
-<!--                        <strong>{{ meal.name }}</strong>-->
-<!--&lt;!&ndash;                        - {{ meal.calories }} calories&ndash;&gt;-->
-<!--&lt;!&ndash;                        <span class="badge badge-info">{{ meal.created_at }}</span>&ndash;&gt;-->
-<!--                        <button class="btn btn-info btn-sm float-right" onclick="openModal('{{ meal.slug }}')">View Details</button>-->
-<!--                        <form method="post" style="display:inline;" class="float-right mr-2">-->
-<!--                            {% csrf_token %}-->
-<!--                            <input type="hidden" name="meal_slug" value="{{ meal.slug }}">-->
-<!--                            <input type="hidden" name="_method" value="delete">-->
-<!--                            <button class="btn btn-outline-danger" type="submit">Delete</button>-->
-<!--                        </form>-->
-<!--                    </li>-->
-<!--                {% endfor %}-->
-<!--            </ul>-->
-<!--        </div>-->
         <div class="meal-list mt-5">
             {% if meals %}
                 <h4>Your Meals</h4>
-                {% for date in meals_dates %}
-                <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#meals">
-                    {{ date }}
-                </button>
-                <div id="meals" class="collapse">
-                    <div class="card-columns">
-                        {% for meal in meals %}
-                        <div class="card m-2">
-                            <div class="card-body">
-                                <h5 class="card-title">{{ meal.name }}</h5>
-                                <div class="d-flex justify-content-between">
-                                    <div class="view-details">
-                                        <button class="btn btn-outline-info btn-sm" onclick="openModal('{{ meal.slug }}')">View Details</button>
-                                    </div>
-                                    <form method="post" style="display:inline;">
-                                        {% csrf_token %}
-                                        <input type="hidden" name="meal_slug" value="{{ meal.slug }}">
-                                        <input type="hidden" name="_method" value="delete">
+                {% for date, calories in calories_by_date.items %}
+                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#meals-{{ date|slugify }}">
+                        {{ date }} - Total Calories: {{ calories }} kcal
+                    </button>
 
-                                        <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
-                                    </form>
-                                </div>
-                            </div>
+                    <div id="meals-{{ date|slugify }}" class="collapse">
+                        <div class="card-columns">
+                            {% for meal in meals %}
+                                {% if meal.date == date %}
+                                    <div class="card m-2">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{ meal.name }}</h5>
+                                            <div class="d-flex justify-content-between">
+                                                <div class="view-details">
+                                                    <button class="btn btn-outline-info btn-sm" onclick="openModal('{{ meal.slug }}')">View Details</button>
+                                                </div>
+                                                <form method="post" style="display:inline;">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="meal_slug" value="{{ meal.slug }}">
+                                                    <input type="hidden" name="_method" value="delete">
+
+                                                    <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
                         </div>
-                        {% endfor %}
                     </div>
-                </div>
                 {% endfor %}
             {% else %}
                 <h4>No meals added yet!</h4>
@@ -196,10 +178,8 @@
         function openModal(mealSlug) {
             // Get the meal details from the server using the slug
             const meals = {{ meals|safe }};  // Pass the meals data from the backend
-            console.log(meals);
             // Find the meal object that matches the given slug
             const selectedMeal = meals.find(meal => meal.slug === mealSlug);
-            console.log(selectedMeal);
             // Populate the modal content with the selected meal's details
             if (selectedMeal) {
                 const modalContent = `
@@ -211,7 +191,6 @@
                         ${selectedMeal.food_items.split(',').map(item => `<li>${item.trim()}</li>`).join('')}
                     </ul>
                 `;
-                console.log(modalContent);
                 // Inject the details into the modal
                 document.getElementById('meal-details-content').innerHTML = modalContent;
             }

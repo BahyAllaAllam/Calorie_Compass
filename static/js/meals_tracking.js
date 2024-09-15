@@ -51,7 +51,6 @@ document.getElementById('add-meal-button').addEventListener('click', function(ev
         })
         .catch(error => {
             validInput = false;
-            console.error('Error fetching data from API:', error);
             alert(`Error fetching data: Please enter valid food items with commaspace, space or plus sign(+) separated values`);
         });
     }))
@@ -74,7 +73,6 @@ document.getElementById('add-meal-button').addEventListener('click', function(ev
                 }
             })
             .catch(error => {
-                console.error('Error submitting form:', error);
                 alert('Error submitting the form: Please enter vaild data.');
             });
         }

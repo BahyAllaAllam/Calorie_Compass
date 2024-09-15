@@ -23,11 +23,17 @@ a:hover {
   opacity: 0.7;
 }
 
-.search-container input {
+#search-form input,
+#meal-name,
+#food-items {
   padding: 10px;
   border-radius: 20px;
   border: 1px solid black;
-  margin-top: 10px;
+  width: 80%;
+  margin: 10px;
+}
+.search-container {
+    margin: 30px auto 60px auto;
 }
 h1 {
   margin: 50px auto;
@@ -57,9 +63,100 @@ h2 {
   color: red;
 }
 
-#add-meal-button {
-  margin-top: 10px;
-  margin-bottom: 10px;
+/* Modal styling */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 50%;
+    max-width: 600px;
+}
+
+.close,
+.hide {
+    color: #aaa;
+    float: right;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.close:hover,
+.hide:hover {
+    color: #000;
+}
+.card-columns {
+    display: flex; /* Ensures that the cards are displayed in a row */
+    flex-wrap: wrap; /* Ensures that the cards wrap onto a new line */
+    gap: 5px; /* Adds some space between the cards */
+}
+
+.card {
+    flex-basis: calc(25% - 20px); /* Each card takes 25% of the container width minus the gap */
+    box-sizing: border-box; /* Ensures padding/margin are included in the width calculation */
+    text-align: center;
+}
+/* For medium screens (tablets, etc.): 2 cards per row */
+@media (max-width: 768px) {
+    .card {
+        flex-basis: calc(50% - 20px); /* 2 cards per row */
+    }
+}
+
+/* For small screens (mobile phones): 1 card per row */
+@media (max-width: 576px) {
+    .card {
+        flex-basis: 100%; /* 1 card per row */
+    }
+}
+.view-details {
+    margin-top: 20px;
+}
+/* Form and Buttons */
+form {
+    margin-top: 20px;
+}
+
+.form-control {
+    margin-bottom: 15px;
+}
+
+#add-meal-button, .btn-info, .btn-danger {
+    margin-top: 10px;
+}
+
+/* Meals List */
+.list-group-item {
+    padding: 15px;
+    font-size: 16px;
+}
+
+/* Table styling */
+.table {
+    width: 100%;
+    margin-top: 20px;
+}
+
+.table thead {
+    background-color: #f8f9fa;
+}
+
+.table-secondary tbody tr:nth-of-type(odd) {
+    background-color: #f9f9f9;
+}
+.badge-info {
+    color: black;
 }
 
 /* Contacts */
