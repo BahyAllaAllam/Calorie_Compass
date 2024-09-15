@@ -2,6 +2,7 @@
 {% load static %}
 
 {% block styles %}
+
   <link rel="stylesheet" href="{% static 'css/about-style.css' %}" />
 {% endblock styles %}
 
@@ -10,15 +11,57 @@
 {% endblock extra_head %}
 
 {% block content %}
-    <main>
-      <h1>About Us</h1>
-      <p>
-        We are about helping people achieve their wellness goal. Calorie Compass
-        is where we share our thoughts, experience, and inspiration to motivate
-        you in your weight loss journey. We believe that with the right tool and
-        support, anyone can achieve their goals. Take a look around our site and
-      </p>
+  <main>
+    <div class="about">
+          <div class="our-story">
+            <h1>Our Story</h1>
+            <p>
+              The idea for "Calorie Compass" was born out of a shared passion for
+              health and wellness. We wanted to create a tool that empowers users
+              to take control of their dietary habits and make healthier choices.
+            </p>
+          </div>
 
-      <h1>LET’S START THIS JOURNEY TOGETHER!</h1>
-    </main>
+          <div class="our-vision">
+            <h1>Our Vision</h1>
+            <p>
+              We are about helping people achieve their wellness goal. Calorie
+              Compass is where you can track your calories intake, and inspiration
+              to motivate you in your weight loss journey. We believe that with
+              the right tool and support, anyone can achieve their goals.
+            </p>
+          </div>
+
+          <div class="our-team">
+            <h1>Our Team</h1>
+            <div class="team">
+              <div class="team_member">
+                <div class="team_img">
+                  <img src="{% static 'img/karima.jpeg' %}" alt="Team_image" />
+                </div>
+                <h3>Karima Mahmoud</h3>
+                <p class="role">Front-End Developer</p>
+                <p>
+                  The creative force driving the frontend development, crafting an
+                  intuitive and user-friendly experience.
+                </p>
+              </div>
+              <div class="team_member">
+                <div class="team_img">
+                  <img src="{% static 'img/bahy.jpg' %}" alt="Team_image" />
+                </div>
+                <h3>Bahy Allam</h3>
+                <p class="role">Back-End Developer</p>
+                <p>
+                  The mastermind behind the backend development, bringing the core
+                  algorithms to life.
+                </p>
+              </div>
+            </div>
+          </div>
+          <h3>LET’S START THIS JOURNEY TOGETHER!</h3>
+    </div>
+  </main>
 {% endblock content %}
+{% block scripts %}
+{% endblock scripts %}
