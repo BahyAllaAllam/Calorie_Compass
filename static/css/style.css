@@ -7,7 +7,9 @@ body {
   align-items: center;
   text-align: center;
 }
-
+body:has(dialog[open]) {
+    overflow: hidden;
+}
 .container {
   background-color: transparent;
   font-weight: 400;
@@ -45,7 +47,7 @@ input[type="number"] {
 .forgot-password {
   font-size: 14px;
   margin-bottom: 15px;
-  align-self: flex-center;
+  align-self: center;
 }
 
 .form-group {
@@ -70,16 +72,18 @@ button {
 }
 
 button:hover {
-  background-color: #0c650f;
+  background-color: #090808;
 }
 
 a {
-  text-decoration: none;
-  color: #0c650f;
+    text-decoration: none;
+    color: #00ff15;
+    background-color: transparent;
 }
 
 a:hover {
-  text-decoration: underline;
+    text-decoration: none;
+    opacity: 0.7;
 }
 
 .error-message {

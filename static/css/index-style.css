@@ -32,12 +32,12 @@ body {
   position: relative;
   height: 100vh;
   width: 100%;
-  background-image: url("/static/img/main.png");
+  background-image: url(../img/main.png);
   background-position: center;
   background-size: cover;
   flex-direction: column;
   justify-content: center;
-  color: white;
+  color: black;
 }
 .intro-page h1 {
   font-size: 50px;
@@ -48,7 +48,7 @@ body {
 }
 
 .intro-page button {
-  display: none;
+    display: none;
   font-size: 25px;
   color: black;
   text-decoration: none;
@@ -73,10 +73,14 @@ body {
   justify-content: center;
 }
 
-a {
-  color: #00ff15;
+/* Links
+.main-body a {
   text-decoration: none;
-  background-color: transparent;
+}*/
+a {
+    color: #00ff15;
+    text-decoration: none;
+    background-color: transparent;
 }
 a:hover {
   text-decoration: underline;
@@ -122,56 +126,56 @@ footer {
 
 /* profile styles */
 .content {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
 }
 
 .content-section {
-  padding: 40px;
-  border: 2px solid #ccc;
-  border-radius: 15px;
-  background-color: transparent;
-  box-shadow: 3px 3px;
-  color: #001d38;
-  font-weight: 400;
-  border-bottom: 2px solid #eaeaea;
-  margin-bottom: 20px;
-  margin-top: 20px;
+    padding: 40px;
+    border: 2px solid #ccc;
+    border-radius: 15px;
+    background-color: transparent;
+    box-shadow: 3px 3px;
+    color: #001D38;
+    font-weight: 400;
+    border-bottom: 2px solid #EAEAEA;
+    margin-bottom: 20px;
+    margin-top: 20px;
 }
 
-.content-section h4 {
-  font-size: 3px;
-  font-weight: 250;
+.content-section h4{
+    font-size: 3px;
+    font-weight: 250;
 }
-@media (max-width: 767px) {
-  .content-section {
-    padding: 30px;
-    margin-top: 30px;
-  }
+@media (max-width: 767px){
+    .content-section{
+        padding:30px;
+        margin-top: 30px;
+    }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-  .content-section {
-    margin-top: 30px;
+    .content-section {
+        margin-top: 30px;
   }
 }
 
 .content-section ul li {
   font-size: 16px;
   font-weight: 400;
-  color: #aab1b7;
+  color: #AAB1B7;
   line-height: 38px;
   /*padding-left: 18px;*/
   position: relative;
 }
 
 /* user profile pic */
-.account-img {
-  height: 125px;
-  width: 125px;
-  margin-right: 20px;
-  margin-bottom: 16px;
+.account-img{
+    height: 125px;
+    width: 125px;
+    margin-right: 20px;
+    margin-bottom: 16px;
 }
 @media (max-width: 999px) {
   .account-img {
@@ -187,7 +191,7 @@ footer {
 }
 /* user name */
 .account-heading {
-  font-size: 2.5rem;
+    font-size: 2.5rem;
 }
 
 @media (max-width: 999px) {
@@ -206,3 +210,4 @@ footer {
   padding-top: 10px;
   line-height: 1.5;
 }
+
