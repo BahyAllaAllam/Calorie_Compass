@@ -13,7 +13,7 @@
     <div class="container">
       <h1>Calorie Calculator</h1>
       <div class="search-container">
-        <form class="d-flex" role="search" method="post">
+        <form id="search-form" class="d-flex" role="search" method="post">
           <input
             class="form-control me-2"
             type="text"
@@ -26,7 +26,7 @@
       </div>
 
       <div class="loading-indicator" style="display: none">
-        <img src="images/loading.gif" alt="Loading..." />
+        <img src="{% static 'img/circles.gif' %}" alt="Loading..." />
       </div>
 
       <h1 class="nutrition-report-display">

@@ -37,7 +37,7 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // API Fetching
-    document.querySelector("form").addEventListener("submit", function (event) {
+    document.querySelector("#search-form").addEventListener("submit", function (event) {
       event.preventDefault();
 
       document.querySelector(".loading-indicator").style.display = "block";
