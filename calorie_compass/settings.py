@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 dotenv_file = BASE_DIR / ".env"
 if os.path.isfile(dotenv_file):
     dotenv.load_dotenv(dotenv_file)
-
+SECRET_KEY = os.environ['SECRET_KEY_VALUE']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -175,8 +175,8 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-# EMAIL_HOST_USER = os.environ['EMAIL_USER']
-# EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
+EMAIL_HOST_USER = os.environ['EMAIL_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_PASSWORD']
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -186,4 +186,4 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # for testing the email backend only
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
-CALORIE_NINJAS_API_KEY = "L3CXnXFXDdyk1eD+K2XfaQ==gzk5Thrkwk67Gkcv"
+CALORIE_NINJAS_API_KEY = os.environ['CALORIE_NINJAS_API_KEY']
