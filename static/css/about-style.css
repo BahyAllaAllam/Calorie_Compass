@@ -6,75 +6,111 @@
   box-sizing: border-box;
 }
 
-.logo {
-  width: 30%;
-}
-
 body {
-  background-image: url(../img/AboutUs.jpg);
   font-family: "Playwrite AU VIC", cursive;
 }
-body:has(dialog[open]) {
-    overflow: hidden;
-}
-.our-team {
-  margin-top: 50px;
+
+.hero {
+  background-image: url(AboutUs.jpg);
+  background-position: center;
+  background-size: cover;
+  height: 160vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
 }
 
+.hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3),
+    rgba(0, 0, 0, 0)
+  );
+}
+
+.our-vision,
+.our-team {
+  padding: 40px;
+}
+
+.our-vision h1,
 .our-team h1 {
   font-family: "Allura", cursive;
   font-size: 52px;
-  margin-bottom: 60px;
-  text-align: center;
+  margin-bottom: 30px;
 }
 
 .team {
-  display: flex;
-  justify-content: center;
-  width: auto;
-  text-align: center;
-  flex-wrap: wrap;
-  background: rgb(0, 0, 0, 0.1)
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
 }
 
-.team .team_member {
+.team-member {
+  display: grid;
+  grid-template-rows: auto 1fr;
   background: #fff;
-  margin: 5px;
-  margin-bottom: 50px;
-  width: 300px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  line-height: 20px;
-  color: #8e8b8b;
-  position: relative;
 }
 
-.team .team_member h3 {
+.team-member img {
+  width: 20%;
+  height: auto;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.team-member h3 {
   color: #4d467f;
-  font-size: 26px;
-  margin-top: 50px;
+  font-size: 20px;
+  margin-bottom: 10px;
 }
 
-.team .team_member p.role {
+.team-member p {
+  color: #8e8b8b;
+  line-height: 1.5;
+}
+
+.team-member p.role {
   color: #ccc;
   margin: 12px 0;
   font-size: 12px;
   text-transform: uppercase;
 }
 
-.team .team_member .team_img {
-  position: absolute;
-  top: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: #fff;
+.cta {
+  text-align: center;
+  padding: 40px;
 }
 
-.team .team_member .team_img img {
-  width: 100px;
-  height: 100px;
-  padding: 5px;
-  border-radius: 50%;
+.cta h3 {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+
+.cta-button {
+  background-color: #4d467f;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+}
+.cta-button:hover {
+  background-color: #3e3a6f;
+  transform: scale(1.02);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+@media (max-width: 768px) {
 }
