@@ -18,69 +18,16 @@ body {
   display: flex;
   align-items: center;
 }
-/* Intro page */
-.intro-page::before {
-  content: "";
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  top: 0;
-  left: 0;
-  background: rgb(0, 0, 0, 0.1);
-}
-.intro-page {
-  position: relative;
-  height: 100vh;
-  width: 100%;
-  background-image: url(../img/main.png);
-  background-position: center;
-  background-size: cover;
-  flex-direction: column;
-  justify-content: center;
-  color: black;
-}
-.intro-page h1 {
-  font-size: 50px;
-}
-.intro-page p {
-  padding: 30px;
-  font-size: 30px;
-}
-
-.intro-page button {
-    display: none;
-  font-size: 25px;
-  color: black;
-  text-decoration: none;
-  background: white;
-  padding: 10px 25px;
-  border-radius: 5px;
-  border: 2px solid white;
-  /*box-shadow: rgb(0, 0, 0, 0.4); //fix this problem*/
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-  transition: 0.3s;
-}
-
-.intro-page button:hover {
-  color: #fff;
-  background: rgb(255, 255, 255, 0.3);
-}
-
-/* Main Body */
 .main-body {
   font-size: 25px;
   padding-top: 100px;
   justify-content: center;
 }
 
-/* Links
-.main-body a {
-  text-decoration: none;
-}*/
 a {
-    color: #00ff15;
-    text-decoration: none;
-    background-color: transparent;
+  color: #00ff15;
+  text-decoration: none;
+  background-color: transparent;
 }
 a:hover {
   text-decoration: underline;
@@ -119,6 +66,99 @@ a:hover {
 }
 
 /* Contacts */
+/* Intro page */
+.intro-page::before {
+  content: "";
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  background: rgb(0, 0, 0, 0.1);
+}
+.intro-page {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+ /* background-color: ; */
+  background-position: center;
+  background-size: cover;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+}
+.intro-page h1 {
+  font-size: 50px;
+}
+.intro-page p {
+  padding: 30px;
+  font-size: 30px;
+}
+
+/* profile styles */
+.content {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.content-section {
+  padding: 40px;
+  border: 2px solid #ccc;
+  border-radius: 15px;
+  background-color: transparent;
+  box-shadow: 3px 3px;
+  color: #001d38;
+  font-weight: 400;
+  border-bottom: 2px solid #eaeaea;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.content-section h4 {
+  font-size: 3px;
+  font-weight: 250;
+}
+
+/*Footer*/
+footer {
+  width: 100%;
+  padding: 20px;
+  margin-top: 20px;
+  font-size: 15px;
+  font-weight: bolder;
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+}
+
+.copyright {
+  margin-top: 15px;
+  padding-top: 30px;
+}
+
+/* Back to top button */
+
+#myBtn {
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 30px; /* Place the button at the bottom of the page */
+  right: 10px; /* Place the button 30px from the right */
+  z-index: 999; /* Make sure it does not overlap */
+  border: none; /* Remove borders */
+  outline: none; /* Remove outline */
+  background-color: black; /* Set a background color */
+  color: white; /* Text color */
+  cursor: pointer; /* Add a mouse pointer on hover */
+  padding: 15px; /* Some padding */
+  border-radius: 10px; /* Rounded corners */
+  font-size: 18px; /* Increase font size */
+}
+
+#myBtn:hover {
+  background-color: #0089ff; /* Add a background color on hover */
+}
+
 .contacts {
   color: #fff;
   background-color: #4d467f;
@@ -134,69 +174,35 @@ a:hover {
   font-size: 45px;
 }
 
-footer {
-  width: 100%;
-  padding: 20px;
-  margin-top: 20px;
-  font-size: 15px;
-  font-weight: bolder;
-  background-color: #343a40;
-  color: white;
-  text-align: center;
-}
-
-/* profile styles */
-.content {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-}
-
-.content-section {
-    padding: 40px;
-    border: 2px solid #ccc;
-    border-radius: 15px;
-    background-color: transparent;
-    box-shadow: 3px 3px;
-    color: #001D38;
-    font-weight: 400;
-    border-bottom: 2px solid #EAEAEA;
-    margin-bottom: 20px;
-    margin-top: 20px;
-}
-
-.content-section h4{
-    font-size: 3px;
-    font-weight: 250;
-}
-@media (max-width: 767px){
-    .content-section{
-        padding:30px;
-        margin-top: 30px;
-    }
+/*Responsive*/
+@media (max-width: 767px) {
+  .content-section {
+    padding: 30px;
+    margin-top: 30px;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 991px) {
-    .content-section {
-        margin-top: 30px;
+  .content-section {
+    margin-top: 30px;
   }
 }
 
 .content-section ul li {
   font-size: 16px;
   font-weight: 400;
-  color: #AAB1B7;
+  color: #aab1b7;
   line-height: 38px;
   /*padding-left: 18px;*/
   position: relative;
 }
 
 /* user profile pic */
-.account-img{
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
+.account-img {
+  height: 125px;
+  width: 125px;
+  margin-right: 20px;
+  margin-bottom: 16px;
 }
 @media (max-width: 999px) {
   .account-img {
@@ -212,7 +218,7 @@ footer {
 }
 /* user name */
 .account-heading {
-    font-size: 2.5rem;
+  font-size: 2.5rem;
 }
 
 @media (max-width: 999px) {
@@ -228,7 +234,6 @@ footer {
   }
 }
 .copyRights p {
-  padding-top: 10px;
+  padding-top: 30px;
   line-height: 1.5;
 }
-
