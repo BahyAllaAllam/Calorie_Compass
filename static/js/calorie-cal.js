@@ -145,6 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
           alert(`Invalid food item: Please enter valid food item`);
         });
     });
+
     //Get the button:
     mybutton = document.getElementById("myBtn");
 
@@ -165,13 +166,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // When the user clicks on the button, scroll to the top of the document
     function topFunction() {
-        window.scrollTo ({
-            top:0,
-            left:0,
-            behavior: "smooth"
-        });
-    //  document.body.scrollTop = 0; // For Safari
-    //     document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+      window.scrollTo ({
+          top:0,
+          left:0,
+          behavior: "smooth"
+      });
 
     }
 });
