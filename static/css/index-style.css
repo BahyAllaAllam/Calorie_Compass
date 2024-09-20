@@ -43,29 +43,6 @@ a:hover {
   height: 300px;
 }
 
-/* Back to top button */
-
-#myBtn {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 30px; /* Place the button at the bottom of the page */
-  right: 10px; /* Place the button 30px from the right */
-  z-index: 999; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: black; /* Set a background color */
-  color: white; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
-}
-
-#myBtn:hover {
-  background-color: #0089ff; /* Add a background color on hover */
-}
-
-/* Contacts */
 /* Intro page */
 .intro-page::before {
   content: "";
@@ -80,7 +57,8 @@ a:hover {
   position: relative;
   height: 100vh;
   width: 100%;
- /* background-color: ; */
+  background: rgb(63,94,251);
+  background: radial-gradient(circle, rgba(63,94,251,1) 0%, rgba(252,70,107,1) 100%);
   background-position: center;
   background-size: cover;
   flex-direction: column;
@@ -94,6 +72,7 @@ a:hover {
   padding: 30px;
   font-size: 30px;
 }
+
 
 /* profile styles */
 .content {
@@ -132,33 +111,10 @@ footer {
   text-align: center;
 }
 
-.copyright {
-  margin-top: 15px;
-  padding-top: 30px;
+.copyright{
+    margin-top: 15px;
+    padding-top: 30px;
 }
-
-/* Back to top button */
-
-#myBtn {
-  display: none; /* Hidden by default */
-  position: fixed; /* Fixed/sticky position */
-  bottom: 30px; /* Place the button at the bottom of the page */
-  right: 10px; /* Place the button 30px from the right */
-  z-index: 999; /* Make sure it does not overlap */
-  border: none; /* Remove borders */
-  outline: none; /* Remove outline */
-  background-color: black; /* Set a background color */
-  color: white; /* Text color */
-  cursor: pointer; /* Add a mouse pointer on hover */
-  padding: 15px; /* Some padding */
-  border-radius: 10px; /* Rounded corners */
-  font-size: 18px; /* Increase font size */
-}
-
-#myBtn:hover {
-  background-color: #0089ff; /* Add a background color on hover */
-}
-
 .contacts {
   color: #fff;
   background-color: #4d467f;

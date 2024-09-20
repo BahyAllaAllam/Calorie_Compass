@@ -1,225 +1,254 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block styles %}
+<link rel="stylesheet" href="{% static 'css/meal-tracking.css' %}" />
+{% endblock styles %} {% block extra_head %} - Daily meals tracking {% endblock
+extra_head %} {% block content %}
+<h1>Track Your Meals</h1>
 
-{% block styles %}
-  <link rel="stylesheet" href="{% static 'css/meal-tracking.css' %}" />
-{% endblock styles %}
-
-{% block extra_head %}
-  - Daily meals tracking
-{% endblock extra_head %}
-
-{% block content %}
-    <h1>Track Your Meals</h1>
-
-    <div class="container">
-        <h3>Add New Meal</h3>
-        <form id="add-meal-form" method="post" action="{% url 'meals_tracker:meals_list' %}">
-            {% csrf_token %}
-            <div class="form-group">
-                <input type="text" class="form-control" id="meal-name" name="name" maxlength="200" placeholder="Meal name (e.g., Breakfast)" required>
-            </div>
-            <div calss="form-group">
-                <textarea type="text" class="form-control" id="food-items" name="food_items" placeholder="Food items separated by a commaspace, space, or plus sign" rows="5" required></textarea>
-            </div>
-            <div class="form-group text-center">
-                <button id="add-meal-button" class="btn btn-outline-dark" type="submit" data-url="{% url 'meals_tracker:meals_list' %}">Add Meal</button>
-            </div>
-        </form>
-
-        <!-- Meals List -->
-        <div class="meal-list mt-5">
-            {% if meals %}
-                <h4>Your Meals</h4>
-                {% for date, calories in calories_by_date.items %}
-                    <button class="btn btn-outline-primary" type="button" data-bs-toggle="collapse" data-bs-target="#meals-{{ date|slugify }}">
-                        {{ date }} - Total Calories: {{ calories }} kcal
-                    </button>
-
-                    <div id="meals-{{ date|slugify }}" class="collapse">
-                        <div class="card-columns">
-                            {% for meal in meals %}
-                                {% if meal.date == date %}
-                                    <div class="card m-2">
-                                        <div class="card-body">
-                                            <h5 class="card-title">{{ meal.name }}</h5>
-                                            <div class="d-flex justify-content-between">
-                                                <div class="view-details">
-                                                    <button class="btn btn-outline-info btn-sm" onclick="openModal('{{ meal.slug }}')">View Details</button>
-                                                </div>
-                                                <form method="post" style="display:inline;">
-                                                    {% csrf_token %}
-                                                    <input type="hidden" name="meal_slug" value="{{ meal.slug }}">
-                                                    <input type="hidden" name="_method" value="delete">
-
-                                                    <button class="btn btn-outline-danger btn-sm" type="submit">Delete</button>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                {% endif %}
-                            {% endfor %}
-                        </div>
-                    </div>
-                {% endfor %}
-            {% else %}
-                <h4>No meals added yet!</h4>
-            {% endif %}
-        </div>
-
-    <!-- Search Section -->
-        <div class="search-container">
-            <h4>Search for food items</h4>
-            <form id="search-form" class="d-flex" role="search" method="post">
-                <input class="form-control" type="text"
-                       placeholder="Search for nutrition info (e.g., 100 grams of egg)"
-                     aria-label="Search" name="query"/>
-                <button class="btn btn-outline-dark mb-2" type="submit">Search</button>
-            </form>
-
-
-            <div class="loading-indicator" style="display: none">
-                <img src="{% static 'img/circles.gif' %}" alt="Loading..." />
-            </div>
-
-            <!-- Nutrition Report -->
-            <div class="nutrition-report-display mt-4">
-                <span class="hide" onclick="HideNutritionReport()">&times;</span>
-                <h2>
-                    The Calories in <span class="food-name"></span> are
-                    <span class="calorie-amount"></span> calories
-                </h2>
-                <h3>Nutritions Facts</h3>
-                <div class="nutrition-report">
-                    <table class="table table-secondary">
-                        <thead>
-                          <tr>
-                            <th scope="col"></th>
-                            <th scope="col">Unit (g or mg)</th>
-                            <th scope="col"></th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr class="table-light">
-                            <th scope="row">Serving Size</th>
-                            <td class="size-report"></td>
-                            <td class="size-report-percentage"></td>
-                          </tr>
-                          <tr class="table-warning">
-                            <th scope="row">Total Carbohydrates</th>
-                            <td class="carb-report"></td>
-                            <td class="carb-report-percentage"></td>
-                          </tr>
-                          <tr class="table-warning">
-                            <th scope="row">Fiber</th>
-                            <td class="fiber-report"></td>
-                            <td class="fiber-report-percentage"></td>
-                          </tr>
-                          <tr class="table-warning">
-                            <th scope="row">Sugar</th>
-                            <td class="sugar-report"></td>
-                            <td class="sugar-report-percentage"></td>
-                          </tr>
-                          <tr class="table-success">
-                            <th scope="row">Proteins</th>
-                            <td class="proteins-report"></td>
-                            <td class="proteins-report-percentage"></td>
-                          </tr>
-                          <tr class="table-success">
-                            <th scope="row">Sodium</th>
-                            <td class="sodium-report"></td>
-                            <td class="sodium-report-percentage"></td>
-                          </tr>
-                          <tr class="table-success">
-                            <th scope="row">Potassium</th>
-                            <td class="potassium-report"></td>
-                            <td class="potassium-report-percentage"></td>
-                          </tr>
-                          <tr class="table-danger">
-                            <th scope="row">Total Fats</th>
-                            <td class="fats-report"></td>
-                            <td class="fats-report-percentage"></td>
-                          </tr>
-                          <tr class="table-danger">
-                            <th scope="row">Saturated Fats</th>
-                            <td class="Sfats-report"></td>
-                            <td class="Sfats-report-percentage"></td>
-                          </tr>
-                          <tr class="table-danger">
-                            <th scope="row">Cholesterol</th>
-                            <td class="cholesterol-report"></td>
-                            <td class="cholesterol-report-percentage"></td>
-                          </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+<div class="container">
+  <h3>Add New Meal</h3>
+  <form
+    id="add-meal-form"
+    method="post"
+    action="{% url 'meals_tracker:meals_list' %}"
+  >
+    {% csrf_token %}
+    <div class="form-group">
+      <input
+        type="text"
+        class="form-control"
+        id="meal-name"
+        name="name"
+        maxlength="200"
+        placeholder="Meal name (e.g., Breakfast)"
+        required
+      />
     </div>
-    <!-- Meal Details Modal -->
-    <div id="mealModal" class="modal">
-        <div class="modal-content">
-            <span class="close" onclick="closeModal()">&times;</span>
-            <h2>Meal Details</h2>
-            <div id="meal-details-content">
-                <!-- Details will be loaded dynamically -->
-            </div>
-        </div>
+    <div calss="form-group">
+      <textarea
+        type="text"
+        class="form-control"
+        id="food-items"
+        name="food_items"
+        placeholder="Food items separated by a commaspace, space, or plus sign"
+        rows="5"
+        required
+      ></textarea>
     </div>
-{% endblock content %}
+    <div class="form-group text-center">
+      <button
+        id="add-meal-button"
+        class="btn btn-outline-dark"
+        type="submit"
+        data-url="{% url 'meals_tracker:meals_list' %}"
+      >
+        Add Meal
+      </button>
+    </div>
+  </form>
 
-{% block scripts %}
-    <script src="{% static 'js/calorie-cal.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="{% static 'js/meals_tracking.js' %}"></script>
-    <!-- Render meals data as JSON for use in JavaScript -->
+  <!-- Meals List -->
+  <div class="meal-list mt-5">
+    {% if meals %}
+    <h4>Your Meals</h4>
+    {% for date, calories in calories_by_date.items %}
+    <button
+      class="btn btn-outline-primary"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#meals-{{ date|slugify }}"
+    >
+      {{ date }} - Total Calories: {{ calories }} kcal
+    </button>
 
-    <script>
-        function openModal(mealSlug) {
-            // Get the meal details from the server using the slug
-            const meals = {{ meals|safe }};  // Pass the meals data from the backend
-            // Find the meal object that matches the given slug
-            const selectedMeal = meals.find(meal => meal.slug === mealSlug);
-            // Populate the modal content with the selected meal's details
-            if (selectedMeal) {
-                const modalContent = `
-                    <h3>${selectedMeal.name}</h3>
-                    <p>Calories: ${selectedMeal.calories}</p>
-                    <p>Created at: ${selectedMeal.created_at}</p>
-                    <p>Food Items:</p>
-                    <ul>
-                        ${selectedMeal.food_items.split(',').map(item => `<li>${item.trim()}</li>`).join('')}
-                    </ul>
-                `;
-                // Inject the details into the modal
-                document.getElementById('meal-details-content').innerHTML = modalContent;
-            }
+    <div id="meals-{{ date|slugify }}" class="collapse">
+      <div class="card-columns">
+        {% for meal in meals %} {% if meal.date == date %}
+        <div class="card m-2">
+          <div class="card-body">
+            <h5 class="card-title">{{ meal.name }}</h5>
+            <div class="d-flex justify-content-between">
+              <div class="view-details">
+                <button
+                  class="btn btn-outline-info btn-sm"
+                  onclick="openModal('{{ meal.slug }}')"
+                >
+                  View Details
+                </button>
+              </div>
+              <form method="post" style="display: inline">
+                {% csrf_token %}
+                <input type="hidden" name="meal_slug" value="{{ meal.slug }}" />
+                <input type="hidden" name="_method" value="delete" />
 
-            // Show the modal
-            document.getElementById('mealModal').style.display = 'block';
-        }
+                <button class="btn btn-outline-danger btn-sm" type="submit">
+                  Delete
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endif %} {% endfor %}
+      </div>
+    </div>
+    {% endfor %} {% else %}
+    <h4>No meals added yet!</h4>
+    {% endif %}
+  </div>
 
-        function closeModal() {
-            document.getElementById('mealModal').style.display = 'none';
-        }
+  <!-- Search Section -->
+  <div class="search-container">
+    <h4>Search for food items</h4>
+    <form id="search-form" class="d-flex" role="search" method="post">
+      <input
+        class="form-control"
+        type="text"
+        placeholder="Search for nutrition info (e.g., 100 grams of egg)"
+        aria-label="Search"
+        name="query"
+      />
+      <button class="btn btn-outline-dark mb-2" type="submit">Search</button>
+    </form>
 
-        function HideNutritionReport() {
-            document.querySelector('input[name="query"]').value = "";
-            document.querySelector(".nutrition-report-display").style.display = 'none';
-        }
-        // Close the modal when clicking outside of the modal content
-        window.onclick = function(event) {
-            if (event.target === document.getElementById('mealModal')) {
-                closeModal();
-            }
-        };
-        function toggleMealDetails(mealId) {
-            const mealDetailsDiv = document.getElementById('meal-details-' + mealId);
-            if (mealDetailsDiv.style.display === 'none') {
-                mealDetailsDiv.style.display = 'block';
-            } else {
-                mealDetailsDiv.style.display = 'none';
-            }
-        }
-    </script>
+    <div class="loading-indicator" style="display: none">
+      <img src="{% static 'img/circles.gif' %}" alt="Loading..." />
+    </div>
+
+    <!-- Nutrition Report -->
+    <div class="nutrition-report-display mt-4">
+      <span class="hide" onclick="HideNutritionReport()">&times;</span>
+      <h2>
+        The Calories in <span class="food-name"></span> are
+        <span class="calorie-amount"></span> calories
+      </h2>
+      <h3>Nutritions Facts</h3>
+      <div class="nutrition-report">
+        <table class="table table-secondary">
+          <thead>
+            <tr>
+              <th scope="col"></th>
+              <th scope="col">Unit (g or mg)</th>
+              <th scope="col"></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="table-light">
+              <th scope="row">Serving Size</th>
+              <td class="size-report"></td>
+              <td class="size-report-percentage"></td>
+            </tr>
+            <tr class="table-warning">
+              <th scope="row">Total Carbohydrates</th>
+              <td class="carb-report"></td>
+              <td class="carb-report-percentage"></td>
+            </tr>
+            <tr class="table-warning">
+              <th scope="row">Fiber</th>
+              <td class="fiber-report"></td>
+              <td class="fiber-report-percentage"></td>
+            </tr>
+            <tr class="table-warning">
+              <th scope="row">Sugar</th>
+              <td class="sugar-report"></td>
+              <td class="sugar-report-percentage"></td>
+            </tr>
+            <tr class="table-success">
+              <th scope="row">Proteins</th>
+              <td class="proteins-report"></td>
+              <td class="proteins-report-percentage"></td>
+            </tr>
+            <tr class="table-success">
+              <th scope="row">Sodium</th>
+              <td class="sodium-report"></td>
+              <td class="sodium-report-percentage"></td>
+            </tr>
+            <tr class="table-success">
+              <th scope="row">Potassium</th>
+              <td class="potassium-report"></td>
+              <td class="potassium-report-percentage"></td>
+            </tr>
+            <tr class="table-danger">
+              <th scope="row">Total Fats</th>
+              <td class="fats-report"></td>
+              <td class="fats-report-percentage"></td>
+            </tr>
+            <tr class="table-danger">
+              <th scope="row">Saturated Fats</th>
+              <td class="Sfats-report"></td>
+              <td class="Sfats-report-percentage"></td>
+            </tr>
+            <tr class="table-danger">
+              <th scope="row">Cholesterol</th>
+              <td class="cholesterol-report"></td>
+              <td class="cholesterol-report-percentage"></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- Meal Details Modal -->
+<div id="mealModal" class="modal">
+  <div class="modal-content">
+    <span class="close" onclick="closeModal()">&times;</span>
+    <h2>Meal Details</h2>
+    <div id="meal-details-content">
+      <!-- Details will be loaded dynamically -->
+    </div>
+  </div>
+</div>
+{% endblock content %} {% block scripts %}
+<script src="{% static 'js/calorie-cal.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<script src="{% static 'js/meals_tracking.js' %}"></script>
+<!-- Render meals data as JSON for use in JavaScript -->
+
+<script>
+  function openModal(mealSlug) {
+      // Get the meal details from the server using the slug
+      const meals = {{ meals|safe }};  // Pass the meals data from the backend
+      // Find the meal object that matches the given slug
+      const selectedMeal = meals.find(meal => meal.slug === mealSlug);
+      // Populate the modal content with the selected meal's details
+      if (selectedMeal) {
+          const modalContent = `
+              <h3>${selectedMeal.name}</h3>
+              <p>Calories: ${selectedMeal.calories}</p>
+              <p>Created at: ${selectedMeal.created_at}</p>
+              <p>Food Items:</p>
+              <ul>
+                  ${selectedMeal.food_items.split(',').map(item => `<li>${item.trim()}</li>`).join('')}
+              </ul>
+          `;
+          // Inject the details into the modal
+          document.getElementById('meal-details-content').innerHTML = modalContent;
+      }
+
+      // Show the modal
+      document.getElementById('mealModal').style.display = 'block';
+  }
+
+  function closeModal() {
+      document.getElementById('mealModal').style.display = 'none';
+  }
+
+  function HideNutritionReport() {
+      document.querySelector('input[name="query"]').value = "";
+      document.querySelector(".nutrition-report-display").style.display = 'none';
+  }
+  // Close the modal when clicking outside of the modal content
+  window.onclick = function(event) {
+      if (event.target === document.getElementById('mealModal')) {
+          closeModal();
+      }
+  };
+  function toggleMealDetails(mealId) {
+      const mealDetailsDiv = document.getElementById('meal-details-' + mealId);
+      if (mealDetailsDiv.style.display === 'none') {
+          mealDetailsDiv.style.display = 'block';
+      } else {
+          mealDetailsDiv.style.display = 'none';
+      }
+  }
+</script>
 {% endblock scripts %}
