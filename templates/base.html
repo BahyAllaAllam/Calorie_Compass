@@ -59,7 +59,7 @@
                                 aria-expanded="false" aria-label="Toggle navigation">
                             <span class="navbar-toggler-icon"></span>
                         </button>
-                        <div class="collapse navbar-collapse align-right" id="navbarNav">
+                        <div class="collapse navbar-collapse align-center" id="navbarNav">
                             <ul class="navbar-nav">
                                 <li class="nav-item">
                                     <a class="nav-link active" aria-current="page" href="/">Home</a>
@@ -134,10 +134,10 @@
                   weekly calorie and weight loss goals. Our app also suggests healthy
                   meals that align with your calorie goals.
                 </p>
-                <a href="#products"><button class="text-center">Our Products</button></a>
+            
             </div>
             <main class="main-body">
-                <h1 class="text-center p-3 our-products" id="products">Our Products</h1>
+                <h1 class="text-center our-products" id="products">Our Products</h1>
                 <div class="container-fluid meal-tracking flex">
                   <div class="row">
                     <div class="col-md-6 p-3">
@@ -187,27 +187,21 @@
         {% endblock content %}
         {% block extra_body %}
         {% endblock extra_body %}
+           
         {% block footer %}
-            <footer>
-                <div class="contacts" id="contacts">
-                    <div class="row">
-                      <div class="col-6">
-                        <h1>
-                          Keep <br />
-                          In <br />Touch!
-                        </h1>
-                      </div>
-                      <div class="col-6">
-                        <div class="social-contacts">
-                          <a
-                            href="https://github.com/BahyAllaAllam/Calorie-compass"
-                            target="_blank"
-                            ><i class="fab fa-github mb-4 mt-4"></i>
-                          </a>
+            <footer class="row contacts" id="contacts">              
+              <div class="col-6">
+               <h1>
+                Keep <br />
+                 In <br />Touch!
+                 </h1>
+              </div>
+             <div class="social-contacts col-6">
+              <a
+               href="https://github.com/BahyAllaAllam/Calorie-compass"
+                  target="_blank"><i class="fab fa-github mb-4 mt-4"></i></a>
                           <br />
-                          <a href="#" target="_blank"
-                            ><i class="fab fa-linkedin mb-4"></i
-                          ></a>
+                  <a href="#" target="_blank"><i class="fab fa-linkedin mb-4"></i></a>
                           <br />
                           <a href="mailto:" target="_blank">
                             <i class="fas fa-envelope mb-4"></i>
@@ -216,12 +210,9 @@
                           <a href="https://wa.me/2001112302971" target="_blank">
                             <i class="fa-brands fa-whatsapp mb-4"></i>
                           </a>
-                        </div>
-                      </div>
-                    </div>
-                </div>
-                <div class="copyRights">
-                    <p>
+                 </div>      
+               <div class="copyRights">
+                    <p class="align-center">
                         Copyright ©2024 Calorie Compass
                         <br>
                         All Rights Reserved
@@ -229,12 +220,12 @@
                         Build by <a href="https://github.com/KariMaa-MahMoud" target="_blank"> Karima Mahmoud</a> &
                         <a href="https://github.com/BahyAllaAllam" target="_blank"> Bahy Allam</a>
                     </p>
-                </div>
-            </footer>
+              </div>
+                    </footer>
         {% endblock footer %}
         <!-- Back to top button -->
-        {% block back_to_top %}
-        <button onclick="topFunction()" id="myBtn" title="Go to top">
+     {% block back_to_top %}
+        <button onclick="topFunction()" class="back-to-top-btn" id="myBtn" title="Go to top">
             <svg class="bi bi-chevron-double-up" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                 <path fill-rule="evenodd" d="M7.646 2.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 3.707 2.354 9.354a.5.5 0 11-.708-.708l6-6z" clip-rule="evenodd"/>
                 <path fill-rule="evenodd" d="M7.646 6.646a.5.5 0 01.708 0l6 6a.5.5 0 01-.708.708L8 7.707l-5.646 5.647a.5.5 0 01-.708-.708l6-6z" clip-rule="evenodd"/>
