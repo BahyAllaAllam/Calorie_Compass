@@ -24,7 +24,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to=image_upload, default='profile/default.jpg')
     age = models.IntegerField(default=0)
-    hight = models.DecimalField(default=0, max_digits=4, decimal_places=1)
+    height = models.DecimalField(default=0, max_digits=4, decimal_places=1)
     weight = models.DecimalField(default=0, max_digits=4, decimal_places=1)
 
     def __str__(self):
