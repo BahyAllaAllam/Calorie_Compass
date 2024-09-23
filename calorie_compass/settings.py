@@ -39,16 +39,11 @@ INSTALLED_APPS = [
     # my_apps
     'users.apps.UsersConfig',
     'meals_tracker.apps.MealsTrackerConfig',
-    'rest_framework',
-    'rest_framework.authtoken',
-    'drf_yasg',
-    "bootstrap5",
     # All Auth configuration
     'allauth',
     'allauth.account',
-    'dj_rest_auth',
-    'dj_rest_auth.registration',
-    'allauth.socialaccount',
+    # 3rd party apps
+    "bootstrap5",
     #######################
     'django.contrib.admin',
     'django.contrib.auth',
@@ -160,8 +155,8 @@ ACCOUNT_USERNAME_BLACKLIST = [
     'admin', 'user', 'users', 'account', 'accounts'
 ]
 
+SOCIALACCOUNT_PROVIDERS = {}
 
-REST_USE_JWT = True
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 ACCOUNT_EMAIL_REQUIRED = True
@@ -183,8 +178,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 
 CALORIE_NINJAS_API_KEY = "L3CXnXFXDdyk1eD+K2XfaQ==gzk5Thrkwk67Gkcv"
-
-REST_FRAMEWORK = {
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 5,
-}

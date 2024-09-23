@@ -89,31 +89,31 @@ h2 {
   background-color: #0089ff; /* Add a background color on hover */
 }
 
-/* Contacts */
+/*Footer*/
+footer {
+  width: 100%;
+  padding-top: 50px;
+  margin-top: 50px;
+  font-size: 15px;
+  font-weight: bolder;
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+}
+
+
 .contacts {
-  color: #fff;
-  background-color: #4d467f;
   padding-left: 250px;
 }
 .contacts h1 {
-  color: #fff;
+  padding-top: 40px;
   line-height: 1.5;
 }
 .social-contacts a i {
-  color: #fff;
+
   font-size: 45px;
 }
 
-footer {
-  width: 100%;
-  padding: 20px;
-  font-size: 15px;
-  font-weight: bolder;
-  font-family: "Playwrite AU VIC", cursive;
-  background-color: #343a40;
-  color: #4d467f;
-  text-align: center;
-}
 
 /* Responsive CSS */
 

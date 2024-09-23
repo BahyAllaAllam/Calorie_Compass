@@ -5,16 +5,17 @@
   padding: 0;
   box-sizing: border-box;
 }
-.about {
-    background: rgb(0, 0, 0, 0.1)
+a {
+  color: #00ff15;
+  text-decoration: none;
+  background-color: transparent;
 }
-
 .logo {
   width: 30%;
 }
 
-body {
-    background-image: url("/static/img/aboutUs.jpg");
+.about {
+   background-image: url("../img/AboutUs.jpg");
     font-family: "Playwrite AU VIC", cursive;
 }
 
@@ -78,4 +79,29 @@ body {
   height: 100px;
   padding: 5px;
   border-radius: 50%;
+}
+
+/*Footer*/
+footer {
+  width: 100%;
+  padding-top: 50px;
+  margin-top: 50px;
+  font-size: 15px;
+  font-weight: bolder;
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+}
+
+
+.contacts {
+  padding-left: 250px;
+}
+.contacts h1 {
+  padding-top: 40px;
+  line-height: 1.5;
+}
+.social-contacts a i {
+
+  font-size: 45px;
 }
