@@ -84,13 +84,13 @@ mybutton = document.getElementById("myBtn");
 
 // Add an event listener to trigger the scroll to top function when the button is clicked
 mybutton.addEventListener('click', topFunction);
-// When the user scrolls down 20px from the top of the document, show the button
+// When the user scrolls down 60px from the top of the document, show the button
 window.onscroll = function() {
     scrollFunction()
 };
 
 function scrollFunction() {
-  if (window.scrollY > 20) {
+  if (window.scrollY > 60) {
     mybutton.style.display = "block";
   } else {
     mybutton.style.display = "none";
