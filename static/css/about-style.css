@@ -1,14 +1,13 @@
 @import url("https://fonts.googleapis.com/css?family=Allura|Josefin+Sans");
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+header{
+     font-family: "Playwrite AU VIC", cursive;
 }
 a {
   color: #00ff15;
   text-decoration: none;
   background-color: transparent;
+  justify-content: center;
 }
 .logo {
   width: 30%;
@@ -16,61 +15,75 @@ a {
 
 .about {
    background-image: url("../img/AboutUs.jpg");
+   background-position: center;
+  background-size: cover;
     font-family: "Playwrite AU VIC", cursive;
+    padding-bottom: 100px;
+}
+.our-story , .our-vision {
+    font-size: 25px;
+    padding: 60px 20px;
 }
 
 .our-team {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 
 .our-team h1 {
   font-family: "Allura", cursive;
-  font-size: 52px;
-  margin-bottom: 60px;
-  text-align: center;
+  font-size: 90px;
+  margin: 80px;
+   text-align: center;
 }
 
 .team {
+
   display: flex;
   justify-content: center;
   width: auto;
   text-align: center;
   flex-wrap: wrap;
-  background: rgb(0, 0, 0, 0.1)
+
 }
 
 .team .team_member {
-  background: #fff;
+  background: #D7CCC3;
   margin: 5px;
   margin-bottom: 50px;
   width: 300px;
   padding: 20px;
-  line-height: 20px;
-  color: #8e8b8b;
+  line-height: 25px;
+  border-radius: 6px;
+  color: #fff;
   position: relative;
 }
 
-.team .team_member h3 {
-  color: #4d467f;
-  font-size: 26px;
+.team .team_member a {
+  color: #fff;
+  font-size: 66px;
   margin-top: 50px;
+  justify-content: center;
 }
-
+.team  h3 {
+        font-size: 1.25rem;
+    }
 .team .team_member p.role {
-  color: #ccc;
+  color: black;
   margin: 12px 0;
   font-size: 12px;
+  line-height: 20px;
+ text-align: center;
   text-transform: uppercase;
 }
 
 .team .team_member .team_img {
   position: absolute;
-  top: -50px;
+  top: -80px;
   left: 50%;
   transform: translateX(-50%);
   width: 100px;
   height: 100px;
-  border-radius: 50%;
+  border-radius: 75%;
   background: #fff;
 }
 
@@ -78,14 +91,14 @@ a {
   width: 100px;
   height: 100px;
   padding: 5px;
-  border-radius: 50%;
+  border-radius: 75%;
 }
 
 /*Footer*/
 footer {
+  font-family: "Playwrite AU VIC", cursive;
   width: 100%;
   padding-top: 50px;
-  margin-top: 50px;
   font-size: 15px;
   font-weight: bolder;
   background-color: #343a40;
@@ -94,9 +107,6 @@ footer {
 }
 
 
-.contacts {
-  padding-left: 250px;
-}
 .contacts h1 {
   padding-top: 40px;
   line-height: 1.5;
