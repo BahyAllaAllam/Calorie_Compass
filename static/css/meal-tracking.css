@@ -183,6 +183,7 @@ form {
 
 /*Footer*/
 footer {
+    font-family: "Playwrite AU VIC", cursive;
   width: 100%;
   padding-top: 50px;
   margin-top: 50px;
@@ -193,12 +194,12 @@ footer {
   text-align: center;
 }
 
-
 .contacts {
   padding-left: 250px;
 }
 .contacts h1 {
-  padding-top: 40px;
+     font-size: 45px;
+  padding-top: 30px;
   line-height: 1.5;
 }
 .social-contacts a i {

@@ -29,6 +29,7 @@ a:hover {
   border: 1px solid black;
   margin-top: 10px;
 }
+
 h1 {
   margin: 50px auto;
   font-size: 30px;
@@ -36,9 +37,9 @@ h1 {
 }
 
 h2 {
+    text-align: center;
     margin: 20px auto;
     padding: 20px;
-    text-align: center;
 }
 
 .loading-indicator {
@@ -62,6 +63,7 @@ h2 {
   margin: 10px auto;
   display: block;
 }
+
 .food-name,
 .calorie-amount {
   color: red;
@@ -91,6 +93,7 @@ h2 {
 
 /*Footer*/
 footer {
+    font-family: "Playwrite AU VIC", cursive;
   width: 100%;
   padding-top: 50px;
   margin-top: 50px;
@@ -101,19 +104,18 @@ footer {
   text-align: center;
 }
 
-
 .contacts {
   padding-left: 250px;
 }
 .contacts h1 {
-  padding-top: 40px;
+     font-size: 45px;
+  padding-top: 30px;
   line-height: 1.5;
 }
 .social-contacts a i {
 
   font-size: 45px;
 }
-
 
 /* Responsive CSS */
 
